@@ -1,4 +1,4 @@
-// Configuração do Firebase com a sua URL real
+// Configuração da conexão com o Firebase do FlexPlus
 const firebaseConfig = {
     databaseURL: "https://playfilmesplusofc-default-rtdb.firebaseio.com"
 };
@@ -8,16 +8,15 @@ if (!firebase.apps.length) {
 }
 
 const db = firebase.database();
-
 let allMoviesAndSeries = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("FlexPlus Web Carregando Dados do Firebase...");
+    console.log("FlexPlus Web Carregando Dados...");
     _carregarDadosDoBanco();
 });
 
 function _carregarDadosDoBanco() {
-    // Lê os nós "Movies" e "Series" da mesma forma que o seu app faz no OnCreate
+    // Lê os nós 'Movies' e 'Series' assim como no app Android
     db.ref('Movies').once('value', (movieSnapshot) => {
         let moviesList = [];
         movieSnapshot.forEach((child) => {
@@ -31,14 +30,12 @@ function _carregarDadosDoBanco() {
             seriesSnapshot.forEach((child) => {
                 let item = child.val();
                 item.id = child.key;
-                item.Seasons = true; // Identifica que é série igual no seu app
+                item.Seasons = true;
                 seriesList.push(item);
             });
 
-            // Junta filmes e séries, igualzinho ao app
             allMoviesAndSeries = moviesList.concat(seriesList);
 
-            // Popula as seções do site com os dados reais
             _popularSecoes(allMoviesAndSeries);
             _popularTvShows(seriesList);
         });
@@ -46,21 +43,24 @@ function _carregarDadosDoBanco() {
 }
 
 function _popularSecoes(lista) {
-    // 1. Banner Principal (Pega o primeiro filme ou aleatório)
-    if (lista.length > 0) {
-        let destaque = lista[Math.floor(Math.random() * lista.length)];
-        document.getElementById('textview_title_banner').innerText = destaque.Title || "FlexPlus";
-        document.getElementById('textview_bio_').innerText = destaque.Genres || "Aproveite seu filme favorito";
-        if (destaque.Poster) {
-            let posterUrl = destaque.Poster.startsWith('http') ? destaque.Poster : `https://image.tmdb.org/t/p/original${destaque.Poster}`;
-            document.getElementById('imageview_topmovie').style.backgroundImage = `url('${posterUrl}')`;
-        }
+    if (lista.length === 0) return;
+
+    // 1. Banner Principal (Usa Backdrop para imagem na horizontal)
+    let destaque = lista[Math.floor(Math.random() * lista.length)];
+    document.getElementById('textview_title_banner').innerText = destaque.Title || "FlexPlus";
+    document.getElementById('textview_bio_').innerText = destaque.Overview || destaque.Genres || "Aproveite seu filme favorito";
+    
+    let imagemBanner = destaque.Backdrop || destaque.Poster || '';
+    if (imagemBanner && imagemBanner !== 'n/a') {
+        let urlFinal = imagemBanner.startsWith('http') 
+            ? imagemBanner 
+            : `https://image.tmdb.org/t/p/original${imagemBanner}`;
+        document.getElementById('imageview_topmovie').style.backgroundImage = `url('${urlFinal}')`;
     }
 
-    // 2. Categoria: Ação (Filtra onde Genres contém "Ação")
+    // 2. Categoria: Ação
     let acaoList = lista.filter(item => item.Genres && item.Genres.includes("Ação"));
     _renderizarCarrossel(acaoList, 'recyclerview_genre_selection');
-    document.getElementById('textview_genres_selection').innerText = "Ação";
 
     // 3. Mais bem avaliados (Vote > 7)
     let topRatedList = lista.filter(item => item.Vote && !isNaN(item.Vote) && parseFloat(item.Vote) > 7);
@@ -70,11 +70,11 @@ function _popularSecoes(lista) {
     let newReleasesList = lista.filter(item => item.Year && !isNaN(item.Year) && parseInt(item.Year) > 2023);
     _renderizarCarrossel(newReleasesList, 'recyclerview_newreleases');
 
-    // 5. Adicionados recentemente (Inverte a ordem)
+    // 5. Adicionados recentemente
     let newlyAddedList = [...lista].reverse().slice(0, 30);
     _renderizarCarrossel(newlyAddedList, 'recyclerview_newlyadded');
 
-    // 6. Continue Assistindo (Pode puxar do localStorage ou deixar vazio se não houver histórico)
+    // 6. Continue Assistindo
     _renderizarCarrossel([], 'recyclerview_resume');
 }
 
@@ -82,10 +82,33 @@ function _popularTvShows(seriesList) {
     _renderizarCarrossel(seriesList, 'recyclerview_tvshows');
 }
 
-// Função para montar os cards dentro de cada carrossel na tela
+// Renderiza o carrossel com setas laterais e sem barra de rolagem visível
 function _renderizarCarrossel(dados, elementId) {
     const container = document.getElementById(elementId);
     if (!container) return;
+
+    // Cria o wrapper com os botões de seta se ainda não existir
+    let wrapper = container.parentElement;
+    if (!wrapper.classList.contains('movie-row-wrapper')) {
+        wrapper = document.createElement('div');
+        wrapper.className = 'movie-row-wrapper';
+        container.parentNode.insertBefore(wrapper, container);
+        wrapper.appendChild(container);
+
+        // Botão Esquerda
+        const btnLeft = document.createElement('button');
+        btnLeft.className = 'scroll-btn scroll-left';
+        btnLeft.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
+        btnLeft.onclick = () => container.scrollBy({ left: -600, behavior: 'smooth' });
+        wrapper.insertBefore(btnLeft, container);
+
+        // Botão Direita
+        const btnRight = document.createElement('button');
+        btnRight.className = 'scroll-btn scroll-right';
+        btnRight.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+        btnRight.onclick = () => container.scrollBy({ left: 600, behavior: 'smooth' });
+        wrapper.appendChild(btnRight);
+    }
 
     container.innerHTML = '';
 
@@ -115,7 +138,6 @@ function _renderizarCarrossel(dados, elementId) {
             </div>
         `;
 
-        // Ao clicar no card, redireciona para a página de detalhes passando os dados
         card.onclick = () => {
             window.location.href = `details.html?id=${item.id}&type=${item.Seasons ? 'series' : 'movie'}`;
         };

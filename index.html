@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlexPlus - Filmes e Séries</title>
+    <title>FlexPlus - Seus Filmes e Séries</title>
     <link rel="stylesheet" href="style.css">
     <!-- Fontes e Ícones -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -11,22 +11,36 @@
 </head>
 <body>
 
-    <!-- Navbar / Cabeçalho para Computador -->
+    <!-- Navbar / Cabeçalho Unificado -->
     <header class="navbar">
         <div class="logo">Flex<span>PLUS</span></div>
+        
         <nav class="nav-links">
-            <a href="#" class="active">Início</a>
-            <a href="#">Filmes</a>
-            <a href="#">Séries</a>
-            <a href="#">Minha Lista</a>
+            <a href="index.html" class="nav-item active" title="Início">
+                <i class="fa-solid fa-house"></i>
+                <span>Início</span>
+            </a>
+            <a href="search.html" class="nav-item" title="Pesquisar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>Pesquisar</span>
+            </a>
+            <a href="favorites.html" class="nav-item" title="Favoritos">
+                <i class="fa-solid fa-bookmark"></i>
+                <span>Favoritos</span>
+            </a>
+            <a href="settings.html" class="nav-item" title="Configurações">
+                <i class="fa-solid fa-gear"></i>
+                <span>Configurações</span>
+            </a>
         </nav>
+
         <div class="user-profile">
             <img id="profile-img" src="https://via.placeholder.com/40" alt="Perfil" class="avatar">
             <span id="textview_name">RBzin</span>
         </div>
     </header>
 
-    <!-- Conteúdo Principal com Rolagem -->
+    <!-- Container Principal com Rolagem -->
     <div class="main-container" id="vscroll_main">
 
         <!-- Banner Topo (Destaque do Filme) -->
@@ -51,7 +65,7 @@
         <!-- Seção de Gêneros (Filtros) -->
         <section class="section-block">
             <div class="genre-container" id="recyclerview_genre">
-                <!-- Os gêneros serão injetados via JavaScript -->
+                <!-- Injetado via JS -->
             </div>
         </section>
 
@@ -87,7 +101,7 @@
 
         <!-- Categoria: Adicionados Recentemente ao FLEX+ -->
         <section class="section-block">
-            <h2 class="section-title">Adicionados recentemente ao <span style="color: #F71B24;">FLEX+</span></h2>
+            <h2 class="section-title">Adicionados recentemente ao <span style="color: #F71B24; margin-left: 5px;">FLEX+</span></h2>
             <div class="movie-row" id="recyclerview_newlyadded"></div>
         </section>
 
@@ -97,7 +111,7 @@
             <div class="movie-row" id="recyclerview_becauseyouwatched"></div>
         </section>
 
-        <!-- Rodapé do Site -->
+        <!-- Rodapé -->
         <footer>
             <p>&copy; 2026 FlexPlus. Todos os direitos reservados.</p>
         </footer>

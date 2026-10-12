@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlexPlus - Filmes e Séries</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fontes e Ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navbar / Cabeçalho para Computador -->
+    <header class="navbar">
+        <div class="logo">Flex<span>PLUS</span></div>
+        <nav class="nav-links">
+            <a href="#" class="active">Início</a>
+            <a href="#">Filmes</a>
+            <a href="#">Séries</a>
+            <a href="#">Minha Lista</a>
+        </nav>
+        <div class="user-profile">
+            <img id="profile-img" src="https://via.placeholder.com/40" alt="Perfil" class="avatar">
+            <span id="textview_name">RBzin</span>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal com Rolagem -->
+    <div class="main-container" id="vscroll_main">
+
+        <!-- Banner Topo (Destaque do Filme) -->
+        <section class="top-movie-banner" id="linear_topmovie">
+            <div class="banner-bg" id="imageview_topmovie"></div>
+            <div class="banner-shadow">
+                <div class="banner-content">
+                    <h1 id="textview_title_banner">Carregando...</h1>
+                    <p id="textview_bio_">Aproveite seu filme favorito</p>
+                    <div class="banner-buttons">
+                        <button class="btn-play" id="linear_play_">
+                            <i class="fa-solid fa-play"></i> Assistir
+                        </button>
+                        <button class="btn-list" id="linear_my_list">
+                            <i class="fa-solid fa-bookmark"></i> Minha lista
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Gêneros (Filtros) -->
+        <section class="section-block">
+            <div class="genre-container" id="recyclerview_genre">
+                <!-- Os gêneros serão injetados via JavaScript -->
+            </div>
+        </section>
+
+        <!-- Categoria: Ação -->
+        <section class="section-block">
+            <h2 class="section-title" id="textview_genres_selection">Ação</h2>
+            <div class="movie-row" id="recyclerview_genre_selection"></div>
+        </section>
+
+        <!-- Categoria: Continue Assistindo -->
+        <section class="section-block" id="linear_resume">
+            <h2 class="section-title">Continue assistindo</h2>
+            <div class="movie-row" id="recyclerview_resume"></div>
+        </section>
+
+        <!-- Categoria: Mais Bem Avaliados -->
+        <section class="section-block">
+            <h2 class="section-title">Mais bem avaliados</h2>
+            <div class="movie-row" id="recyclerview_toprated"></div>
+        </section>
+
+        <!-- Categoria: Programas de TV -->
+        <section class="section-block">
+            <h2 class="section-title">Programas de TV</h2>
+            <div class="movie-row" id="recyclerview_tvshows"></div>
+        </section>
+
+        <!-- Categoria: Novos Lançamentos -->
+        <section class="section-block">
+            <h2 class="section-title">Novos lançamentos</h2>
+            <div class="movie-row" id="recyclerview_newreleases"></div>
+        </section>
+
+        <!-- Categoria: Adicionados Recentemente ao FLEX+ -->
+        <section class="section-block">
+            <h2 class="section-title">Adicionados recentemente ao <span style="color: #F71B24;">FLEX+</span></h2>
+            <div class="movie-row" id="recyclerview_newlyadded"></div>
+        </section>
+
+        <!-- Categoria: Porque você assistiu -->
+        <section class="section-block">
+            <h2 class="section-title">Porque você assistiu a <span id="textview_becauseyouwatched_movie" style="color: #F71B24; margin-left: 5px;">Filme</span></h2>
+            <div class="movie-row" id="recyclerview_becauseyouwatched"></div>
+        </section>
+
+        <!-- Rodapé do Site -->
+        <footer>
+            <p>&copy; 2026 FlexPlus. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

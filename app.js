@@ -1,4 +1,3 @@
-// Configuração da conexão com o Firebase do FlexPlus
 const firebaseConfig = {
     databaseURL: "https://playfilmesplusofc-default-rtdb.firebaseio.com"
 };
@@ -11,12 +10,10 @@ const db = firebase.database();
 let allMoviesAndSeries = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("FlexPlus Web Carregando Dados...");
     _carregarDadosDoBanco();
 });
 
 function _carregarDadosDoBanco() {
-    // Lê os nós 'Movies' e 'Series' assim como no app Android
     db.ref('Movies').once('value', (movieSnapshot) => {
         let moviesList = [];
         movieSnapshot.forEach((child) => {
@@ -45,36 +42,34 @@ function _carregarDadosDoBanco() {
 function _popularSecoes(lista) {
     if (lista.length === 0) return;
 
-    // 1. Banner Principal (Usa Backdrop para imagem na horizontal)
+    // Sorteia um destaque para o Banner
     let destaque = lista[Math.floor(Math.random() * lista.length)];
     document.getElementById('textview_title_banner').innerText = destaque.Title || "FlexPlus";
-    document.getElementById('textview_bio_').innerText = destaque.Overview || destaque.Genres || "Aproveite seu filme favorito";
+    document.getElementById('textview_bio_').innerText = destaque.Overview || destaque.Genres || "Aproveite seu conteúdo favorito";
     
     let imagemBanner = destaque.Backdrop || destaque.Poster || '';
     if (imagemBanner && imagemBanner !== 'n/a') {
-        let urlFinal = imagemBanner.startsWith('http') 
-            ? imagemBanner 
-            : `https://image.tmdb.org/t/p/original${imagemBanner}`;
+        let urlFinal = imagemBanner.startsWith('http') ? imagemBanner : `https://image.tmdb.org/t/p/original${imagemBanner}`;
         document.getElementById('imageview_topmovie').style.backgroundImage = `url('${urlFinal}')`;
     }
 
-    // 2. Categoria: Ação
+    // Botão do Banner agora leva para as Informações (details.html) exatamente como clicar na capa
+    document.getElementById('linear_play_').onclick = () => {
+        window.location.href = `details.html?id=${destaque.id}&type=${destaque.Seasons ? 'series' : 'movie'}`;
+    };
+
     let acaoList = lista.filter(item => item.Genres && item.Genres.includes("Ação"));
     _renderizarCarrossel(acaoList, 'recyclerview_genre_selection');
 
-    // 3. Mais bem avaliados (Vote > 7)
     let topRatedList = lista.filter(item => item.Vote && !isNaN(item.Vote) && parseFloat(item.Vote) > 7);
     _renderizarCarrossel(topRatedList, 'recyclerview_toprated');
 
-    // 4. Novos Lançamentos (Year > 2023)
     let newReleasesList = lista.filter(item => item.Year && !isNaN(item.Year) && parseInt(item.Year) > 2023);
     _renderizarCarrossel(newReleasesList, 'recyclerview_newreleases');
 
-    // 5. Adicionados recentemente
     let newlyAddedList = [...lista].reverse().slice(0, 30);
     _renderizarCarrossel(newlyAddedList, 'recyclerview_newlyadded');
 
-    // 6. Continue Assistindo
     _renderizarCarrossel([], 'recyclerview_resume');
 }
 
@@ -82,12 +77,10 @@ function _popularTvShows(seriesList) {
     _renderizarCarrossel(seriesList, 'recyclerview_tvshows');
 }
 
-// Renderiza o carrossel com setas laterais e sem barra de rolagem visível
 function _renderizarCarrossel(dados, elementId) {
     const container = document.getElementById(elementId);
     if (!container) return;
 
-    // Cria o wrapper com os botões de seta se ainda não existir
     let wrapper = container.parentElement;
     if (!wrapper.classList.contains('movie-row-wrapper')) {
         wrapper = document.createElement('div');
@@ -95,14 +88,12 @@ function _renderizarCarrossel(dados, elementId) {
         container.parentNode.insertBefore(wrapper, container);
         wrapper.appendChild(container);
 
-        // Botão Esquerda
         const btnLeft = document.createElement('button');
         btnLeft.className = 'scroll-btn scroll-left';
         btnLeft.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
         btnLeft.onclick = () => container.scrollBy({ left: -600, behavior: 'smooth' });
         wrapper.insertBefore(btnLeft, container);
 
-        // Botão Direita
         const btnRight = document.createElement('button');
         btnRight.className = 'scroll-btn scroll-right';
         btnRight.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
@@ -130,11 +121,13 @@ function _renderizarCarrossel(dados, elementId) {
         }
 
         const title = item.Title || 'Sem Título';
+        const vote = item.Vote || '0.0';
 
         card.innerHTML = `
             <img src="${poster}" alt="${title}">
             <div class="info">
                 <h4>${title}</h4>
+                <div class="rating"><i class="fa-solid fa-star" style="color: #F71B24;"></i> <span>${vote}</span></div>
             </div>
         `;
 

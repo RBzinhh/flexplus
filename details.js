@@ -43,10 +43,13 @@ function _carregarDetalhes(id, type) {
         }
         document.getElementById('imageview_backdrop').style.backgroundImage = `url('${backdrop}')`;
 
-        // Botão Play
+        // Botão Play (Redireciona para o player.html com url e título)
         document.getElementById('linear_play').onclick = () => {
-            if (currentMedia.Link || currentMedia.StreamUrl) {
-                window.location.href = currentMedia.Link || currentMedia.StreamUrl;
+            let videoLink = currentMedia.Link || currentMedia.StreamUrl || currentMedia.url || '';
+            let mediaTitle = currentMedia.Title || 'FlexPlus';
+
+            if (videoLink) {
+                window.location.href = `player.html?url=${encodeURIComponent(videoLink)}&title=${encodeURIComponent(mediaTitle)}`;
             } else {
                 alert('Link de exibição indisponível no momento.');
             }

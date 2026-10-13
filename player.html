@@ -11,16 +11,12 @@
 <body class="player-body">
 
     <div class="player-container" id="linear_Main">
-        <!-- Elemento de Vídeo HTML5 (Substitui o PlayerView do Android) -->
         <video id="playerView" class="video-js" preload="auto">
             <source src="" type="video/mp4" id="video_source">
             Seu navegador não suporta a reprodução de vídeos.
         </video>
 
-        <!-- Camada de Controles Customizados -->
         <div class="player-controls-overlay" id="linear_Controls">
-            
-            <!-- Topo: Botão Voltar e Título -->
             <div class="control-top" id="linear_control_top">
                 <button class="icon-btn" id="imageview_Back" onclick="window.history.back()">
                     <i class="fa-solid fa-arrow-left"></i>
@@ -28,7 +24,6 @@
                 <span id="textview_Title">Carregando...</span>
             </div>
 
-            <!-- Centro: Botões de Ação Rápida (Retroceder, Play/Pause, Avançar) -->
             <div class="control-middle" id="linear_control_middle">
                 <button class="control-big-btn" id="imageview_Backwards" title="-10s">
                     <i class="fa-solid fa-rotate-left"></i>
@@ -41,58 +36,30 @@
                 </button>
             </div>
 
-            <!-- Centro (Textos de feedback de pulo de 10s e Zoom) -->
-            <div class="control-texts-feedback" id="linear_Texts" style="display: none;">
-                <span id="textview_backward_10">10 -</span>
-                <span id="textview_Zoom">Ajustar à tela</span>
-                <span id="textview_forward_10">10 +</span>
-            </div>
-
-            <!-- Barra de Progresso e Tempos -->
             <div class="control-progress-bar-area" id="linear_Control_Progress">
                 <span id="textview_Current_Time">00:00:00</span>
                 <input type="range" id="seekbar_progress" value="0" min="0" max="100" step="0.1">
                 <span id="textview_Total_Duration">00:00:00</span>
             </div>
 
-            <!-- Rodapé: Controles Avançados (PIP, Tela, Episódios, Legendas, Faixas, Próximo) -->
             <div class="control-bottom" id="linear_control_bottom">
-                <button class="control-opt-btn" id="imageview_Pip" title="Picture in Picture">
-                    <i class="fa-solid fa-clone"></i> <span>PIP</span>
-                </button>
-                <button class="control-opt-btn" id="imageview_Resize" title="Ajustar Tela">
-                    <i class="fa-solid fa-expand"></i> <span id="textview_Size">Tela</span>
-                </button>
-                <button class="control-opt-btn" id="imageview_Episodes" title="Episódios">
-                    <i class="fa-solid fa-list"></i> <span>Episódios</span>
-                </button>
-                <button class="control-opt-btn" id="imageview_subtitles" title="Legendas">
-                    <i class="fa-solid fa-closed-captioning"></i> <span>Legendas</span>
-                </button>
-                <button class="control-opt-btn" id="imageview_TrackSelector" title="Faixas de Áudio">
-                    <i class="fa-solid fa-music"></i> <span>Faixas</span>
-                </button>
-                <button class="control-opt-btn" id="imageview_Next" title="Próximo Episódio">
-                    <i class="fa-solid fa-forward-step"></i> <span id="textview_Next">Próximo</span>
-                </button>
+                <button class="control-opt-btn" id="imageview_Pip"><i class="fa-solid fa-clone"></i> <span>PIP</span></button>
+                <button class="control-opt-btn" id="imageview_Resize"><i class="fa-solid fa-expand"></i> <span id="textview_Size">Tela</span></button>
+                <button class="control-opt-btn" id="imageview_Episodes"><i class="fa-solid fa-list"></i> <span>Episódios</span></button>
+                <button class="control-opt-btn" id="imageview_subtitles"><i class="fa-solid fa-closed-captioning"></i> <span>Legendas</span></button>
+                <button class="control-opt-btn" id="imageview_Next"><i class="fa-solid fa-forward-step"></i> <span id="textview_Next">Próximo</span></button>
             </div>
-
         </div>
 
-        <!-- Painel Lateral de Episódios -->
         <div class="episodes-drawer" id="linear_episodes" style="display: none;">
             <div class="drawer-header">
                 <h3>Episódios</h3>
                 <button onclick="_toggleEpisodios()"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="recyclerview-episodes" id="recyclerview_episodes">
-                <!-- Preenchido via JS -->
-            </div>
+            <div class="recyclerview-episodes" id="recyclerview_episodes"></div>
         </div>
-
     </div>
 
-    <!-- Script do Player -->
     <script src="player.js"></script>
 </body>
 </html>

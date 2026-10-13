@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlexPlus - Seus Filmes e Séries</title>
+    <title>FlexPlus - Início</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,45 +13,32 @@
     <!-- Navbar / Cabeçalho Unificado -->
     <header class="navbar">
         <div class="logo">Flex<span>PLUS</span></div>
-        
         <nav class="nav-links">
-            <a href="index.html" class="nav-item active" title="Início">
-                <i class="fa-solid fa-house"></i>
-                <span>Início</span>
-            </a>
-            <a href="search.html" class="nav-item" title="Pesquisar">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <span>Pesquisar</span>
-            </a>
-            <a href="favorites.html" class="nav-item" title="Favoritos">
-                <i class="fa-solid fa-bookmark"></i>
-                <span>Favoritos</span>
-            </a>
-            <a href="settings.html" class="nav-item" title="Configurações">
-                <i class="fa-solid fa-gear"></i>
-                <span>Configurações</span>
-            </a>
+            <a href="index.html" class="nav-item active"><i class="fa-solid fa-house"></i><span>Início</span></a>
+            <a href="search.html" class="nav-item"><i class="fa-solid fa-magnifying-glass"></i><span>Pesquisar</span></a>
+            <a href="favorites.html" class="nav-item"><i class="fa-solid fa-bookmark"></i><span>Favoritos</span></a>
+            <a href="settings.html" class="nav-item"><i class="fa-solid fa-gear"></i><span>Configurações</span></a>
         </nav>
-
         <div class="user-profile">
             <img id="profile-img" src="https://via.placeholder.com/40" alt="Perfil" class="avatar">
             <span id="textview_name">RBzin</span>
         </div>
     </header>
 
-    <!-- Container Principal com Rolagem -->
+    <!-- Container Principal -->
     <div class="main-container" id="vscroll_main">
 
-        <!-- Banner Topo (Destaque do Filme) -->
+        <!-- Banner Topo (Destaque) -->
         <section class="top-movie-banner" id="linear_topmovie">
             <div class="banner-bg" id="imageview_topmovie"></div>
             <div class="banner-shadow">
                 <div class="banner-content">
                     <h1 id="textview_title_banner">Carregando...</h1>
-                    <p id="textview_bio_">Aproveite seu filme favorito</p>
+                    <p id="textview_bio_">Aproveite seu conteúdo favorito</p>
                     <div class="banner-buttons">
+                        <!-- Botão do Banner agora direciona para as informações (details.html) -->
                         <button class="btn-play" id="linear_play_">
-                            <i class="fa-solid fa-play"></i> Assistir
+                            <i class="fa-solid fa-info-circle"></i> Mais Informações
                         </button>
                         <button class="btn-list" id="linear_my_list">
                             <i class="fa-solid fa-bookmark"></i> Minha lista
@@ -61,14 +48,14 @@
             </div>
         </section>
 
-        <!-- Seção de Gêneros (Filtros) -->
+        <!-- Seção de Gêneros -->
         <section class="section-block">
             <div class="genre-container" id="recyclerview_genre"></div>
         </section>
 
         <!-- Categoria: Ação -->
         <section class="section-block">
-            <h2 class="section-title" id="textview_genres_selection">Ação</h2>
+            <h2 class="section-title">Ação</h2>
             <div class="movie-row" id="recyclerview_genre_selection"></div>
         </section>
 
@@ -102,7 +89,6 @@
             <div class="movie-row" id="recyclerview_newlyadded"></div>
         </section>
 
-        <!-- Rodapé -->
         <footer>
             <p>&copy; 2026 FlexPlus. Todos os direitos reservados.</p>
         </footer>

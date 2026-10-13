@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalDurationText = document.getElementById('textview_Total_Duration');
     const titleText = document.getElementById('textview_Title');
 
-    // Recupera dados passados por URL (ex: player.html?url=LINK_DO_VIDEO&title=NOME)
     const urlParams = new URLSearchParams(window.location.search);
     const videoUrl = urlParams.get('url');
     const movieTitle = urlParams.get('title');
@@ -20,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
         titleText.innerText = decodeURIComponent(movieTitle);
     }
 
-    // Play / Pause
     function togglePlay() {
         if (video.paused) {
             video.play();
@@ -34,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
     playPauseBtn.addEventListener('click', togglePlay);
     video.addEventListener('click', togglePlay);
 
-    // Atualizar tempo e barra de progresso
     video.addEventListener('timeupdate', () => {
         if (!isNaN(video.duration)) {
             let percent = (video.currentTime / video.duration) * 100;
@@ -44,13 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Controlar Seekbar manualmente
     seekbar.addEventListener('input', () => {
         let time = (seekbar.value / 100) * video.duration;
         video.currentTime = time;
     });
 
-    // Botões -10s e +10s
     document.getElementById('imageview_Backwards').addEventListener('click', () => {
         video.currentTime = Math.max(0, video.currentTime - 10);
     });
@@ -59,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
         video.currentTime = Math.min(video.duration, video.currentTime + 10);
     });
 
-    // Botão Tela Cheia / Resize
     document.getElementById('imageview_Resize').addEventListener('click', () => {
         if (!document.fullscreenElement) {
             document.documentElement.requestFullscreen();
@@ -68,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Botão PIP (Picture in Picture)
     document.getElementById('imageview_Pip').addEventListener('click', async () => {
         try {
             if (document.pictureInPictureElement) {
@@ -81,7 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Abrir/Fechar Gaveta de Episódios
     document.getElementById('imageview_Episodes').addEventListener('click', _toggleEpisodios);
 });
 

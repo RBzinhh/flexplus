@@ -585,3 +585,181 @@ footer {
     color: #F71B24;
     cursor: pointer;
 }
+
+/* Estilos do Player Web */
+.player-body {
+    background-color: #000000;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.player-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-js {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Camada de Controles (Overlay sobre o vídeo) */
+.player-controls-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.8) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 40px;
+    z-index: 10;
+    transition: opacity 0.3s ease;
+}
+
+.control-top {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.control-top span {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.icon-btn, .control-opt-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.3s;
+}
+
+.icon-btn:hover, .control-opt-btn:hover {
+    color: #F71B24;
+}
+
+.control-middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.control-big-btn {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.control-big-btn:hover {
+    background: #F71B24;
+    border-color: #F71B24;
+    transform: scale(1.1);
+}
+
+.control-play-pause-btn {
+    background: #F71B24;
+    border: none;
+    color: #ffffff;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    font-size: 26px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.control-play-pause-btn:hover {
+    transform: scale(1.1);
+}
+
+.control-progress-bar-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.control-progress-bar-area span {
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    min-width: 60px;
+    text-align: center;
+}
+
+.control-progress-bar-area input[type=range] {
+    flex: 1;
+    height: 6px;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+.control-progress-bar-area input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #F71B24;
+}
+
+.control-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Gaveta Lateral de Episódios */
+.episodes-drawer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 350px;
+    height: 100%;
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(15px);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: -5px 0 20px rgba(0,0,0,0.8);
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.drawer-header h3 { font-size: 18px; color: #fff; }
+.drawer-header button { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; }

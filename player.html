@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlexPlus - Player</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- Link para o CSS com versão para ignorar cache antigo -->
+    <link rel="stylesheet" href="style.css?v=2.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="player-body">
 
     <div class="player-container" id="linear_Main">
+        <!-- Vídeo HTML5 -->
         <video id="playerView" class="video-js" preload="auto">
             <source src="" type="video/mp4" id="video_source">
             Seu navegador não suporta a reprodução de vídeos.
         </video>
 
+        <!-- Controles Customizados Sobrepostos -->
         <div class="player-controls-overlay" id="linear_Controls">
             <div class="control-top" id="linear_control_top">
                 <button class="icon-btn" id="imageview_Back" onclick="window.history.back()">
@@ -51,6 +54,7 @@
             </div>
         </div>
 
+        <!-- Painel de Episódios -->
         <div class="episodes-drawer" id="linear_episodes" style="display: none;">
             <div class="drawer-header">
                 <h3>Episódios</h3>

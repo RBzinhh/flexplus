@@ -10,7 +10,6 @@
 </head>
 <body>
 
-    <!-- Navbar / Cabeçalho Unificado -->
     <header class="navbar">
         <div class="logo">Flex<span>PLUS</span></div>
         <nav class="nav-links">
@@ -25,23 +24,18 @@
         </div>
     </header>
 
-    <!-- Container Principal da Pesquisa -->
     <div class="main-container search-page">
-        
-        <!-- Barra de Pesquisa -->
         <div class="search-bar-container">
             <i class="fa-solid fa-magnifying-glass"></i>
             <input type="text" id="edittext_search" placeholder="Pesquisar filme ou série...">
         </div>
 
-        <!-- Filtros -->
         <div class="filter-bar">
-            <div class="filter-chip active" id="linear_recommended_filter">Recomendado</div>
-            <div class="filter-chip" id="linear_english">Inglês</div>
-            <div class="filter-chip" id="linear_hindi">Português</div>
+            <div class="filter-chip active">Recomendado</div>
+            <div class="filter-chip">Inglês</div>
+            <div class="filter-chip">Português</div>
         </div>
 
-        <!-- Resultados -->
         <div id="linear_main">
             <p id="textview_no_movies" class="no-movies-msg" style="display: none;">Lamentamos não termos encontrado o que você procurava...</p>
             
@@ -53,7 +47,6 @@
         </div>
     </div>
 
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script src="search.js"></script>

@@ -4,21 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlexPlus - Player</title>
-    <!-- Link para o CSS com versão para ignorar cache antigo -->
-    <link rel="stylesheet" href="style.css?v=2.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        .player-body { background-color: #000000; overflow: hidden; height: 100vh; width: 100vw; }
+        .player-container { position: relative; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; background: #000; }
+        .video-js { width: 100%; height: 100%; object-fit: contain; }
+        .player-controls-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 25%, transparent 75%, rgba(0,0,0,0.9) 100%); display: flex; flex-direction: column; justify-content: space-between; padding: 25px 40px; z-index: 10; }
+        .control-top { display: flex; align-items: center; gap: 15px; }
+        .control-top span { font-size: 18px; font-weight: 600; color: #ffffff; }
+        .icon-btn, .control-opt-btn { background: none; border: none; color: #ffffff; cursor: pointer; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+        .icon-btn:hover, .control-opt-btn:hover { color: #F71B24; }
+        .control-middle { display: flex; justify-content: center; align-items: center; gap: 35px; }
+        .control-big-btn { background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff; width: 50px; height: 50px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .control-big-btn:hover { background: #F71B24; border-color: #F71B24; }
+        .control-play-pause-btn { background: #F71B24; border: none; color: #ffffff; width: 65px; height: 65px; border-radius: 50%; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .control-progress-bar-area { display: flex; align-items: center; gap: 15px; width: 100%; }
+        .control-progress-bar-area span { font-size: 12px; font-weight: 600; color: #ffffff; min-width: 60px; text-align: center; }
+        .control-progress-bar-area input[type=range] { flex: 1; height: 6px; -webkit-appearance: none; background: rgba(255, 255, 255, 0.3); border-radius: 3px; outline: none; cursor: pointer; }
+        .control-progress-bar-area input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #F71B24; }
+        .control-bottom { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+    </style>
 </head>
 <body class="player-body">
 
     <div class="player-container" id="linear_Main">
-        <!-- Vídeo HTML5 -->
         <video id="playerView" class="video-js" preload="auto">
             <source src="" type="video/mp4" id="video_source">
             Seu navegador não suporta a reprodução de vídeos.
         </video>
 
-        <!-- Controles Customizados Sobrepostos -->
         <div class="player-controls-overlay" id="linear_Controls">
             <div class="control-top" id="linear_control_top">
                 <button class="icon-btn" id="imageview_Back" onclick="window.history.back()">
@@ -52,15 +68,6 @@
                 <button class="control-opt-btn" id="imageview_subtitles"><i class="fa-solid fa-closed-captioning"></i> <span>Legendas</span></button>
                 <button class="control-opt-btn" id="imageview_Next"><i class="fa-solid fa-forward-step"></i> <span id="textview_Next">Próximo</span></button>
             </div>
-        </div>
-
-        <!-- Painel de Episódios -->
-        <div class="episodes-drawer" id="linear_episodes" style="display: none;">
-            <div class="drawer-header">
-                <h3>Episódios</h3>
-                <button onclick="_toggleEpisodios()"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="recyclerview-episodes" id="recyclerview_episodes"></div>
         </div>
     </div>
 

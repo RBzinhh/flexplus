@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlexPlus - Detalhes</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- Link para o CSS com versão para ignorar cache antigo -->
+    <link rel="stylesheet" href="style.css?v=2.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
+    <!-- Navbar -->
     <header class="navbar">
         <div class="logo">Flex<span>PLUS</span></div>
         <nav class="nav-links">
@@ -25,7 +27,7 @@
     </header>
 
     <div class="main-container details-container">
-        <!-- Banner Backdrop -->
+        <!-- Banner Backdrop / Topo -->
         <section class="details-banner" id="imageview_backdrop">
             <div class="details-banner-shadow">
                 <div class="details-banner-content">
@@ -60,6 +62,7 @@
             <p class="overview-text" id="textview_overview">Carregando sinopse...</p>
         </section>
 
+        <!-- Abas -->
         <section class="tabs-section">
             <div class="tab-headers">
                 <button class="tab-btn active" onclick="_mudarAba('trailer', event)">Trailer</button>
@@ -70,8 +73,8 @@
             <div class="tab-contents">
                 <div class="tab-page active" id="tab_trailer">
                     <div class="video-container" id="trailer_container">
-                        <iframe id="trailer_iframe" src="" frameborder="0" allowfullscreen style="width: 100%; height: 450px; border-radius: 10px; display: none;"></iframe>
-                        <p id="no_trailer_msg" style="color: #888; padding: 20px;">Nenhum trailer disponível.</p>
+                        <iframe id="trailer_iframe" src="" frameborder="0" allowfullscreen style="display: none;"></iframe>
+                        <p id="no_trailer_msg" style="color: #888; padding: 20px;">Nenhum trailer disponível para este título.</p>
                     </div>
                 </div>
 
@@ -92,6 +95,7 @@
         </section>
     </div>
 
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script src="details.js"></script>

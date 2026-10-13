@@ -4,14 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlexPlus - Detalhes</title>
-    <!-- Link para o CSS com versão para ignorar cache antigo -->
-    <link rel="stylesheet" href="style.css?v=2.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: #111111; color: #ffffff; min-height: 100vh; overflow-x: hidden; }
+        
+        /* Navbar */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; background: rgba(17, 17, 17, 0.95); position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .logo { font-size: 24px; font-weight: 700; color: #ffffff; }
+        .logo span { color: #F71B24; }
+        .nav-links { display: flex; gap: 25px; align-items: center; }
+        .nav-item { color: #b3b3b3; text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .nav-item:hover, .nav-item.active { color: #F71B24; }
+        .user-profile { display: flex; align-items: center; gap: 10px; }
+        .avatar { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid #F71B24; }
+        #textview_name { font-size: 14px; font-weight: 600; }
+
+        /* Detalhes Banner */
+        .details-container { margin-top: 70px; }
+        #imageview_backdrop { position: relative; width: 100%; height: 60vh; min-height: 420px; background-color: #181818; background-size: cover; background-position: center 20%; background-repeat: no-repeat; }
+        .details-banner-shadow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, #111111 0%, rgba(17, 17, 17, 0.85) 40%, transparent 100%), linear-gradient(to top, #111111 0%, transparent 60%); display: flex; align-items: flex-end; padding: 0 50px 40px 50px; }
+        .details-banner-content { max-width: 700px; z-index: 2; }
+        .btn-back { background: rgba(0, 0, 0, 0.6); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); padding: 8px 18px; border-radius: 6px; cursor: pointer; font-weight: 600; margin-bottom: 15px; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-back:hover { background: #F71B24; border-color: #F71B24; }
+        #textview_title { font-size: 36px; font-weight: 700; color: #ffffff; margin-bottom: 10px; }
+        .meta-row { display: flex; align-items: center; gap: 15px; margin: 12px 0 20px 0; font-size: 14px; }
+        .badge-rating { color: #F71B24; font-weight: 700; }
+        .badge-lang { background: #222; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+        .details-buttons { display: flex; gap: 15px; }
+        .btn-play-large, .btn-download-large { padding: 12px 28px; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: transform 0.2s; }
+        .btn-play-large { background-color: #F71B24; color: #ffffff; }
+        .btn-download-large { background-color: #292929; color: #ffffff; }
+        .btn-play-large:hover, .btn-download-large:hover { transform: scale(1.03); }
+        .details-info-section { padding: 25px 50px 10px 50px; }
+        #textview_genres { color: #F71B24; font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+        #textview_overview { color: #b3b3b3; font-size: 14px; line-height: 1.6; max-width: 900px; }
+
+        /* Abas */
+        .tabs-section { padding: 20px 50px 50px 50px; }
+        .tab-headers { display: flex; gap: 25px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 20px; }
+        .tab-btn { background: none; border: none; color: #888; font-size: 15px; font-weight: 700; padding-bottom: 10px; cursor: pointer; border-bottom: 3px solid transparent; }
+        .tab-btn.active { color: #ffffff; border-bottom-color: #F71B24; }
+        .tab-page { display: none; }
+        .tab-page.active { display: block; }
+        #trailer_iframe { width: 100%; max-width: 750px; height: 420px; border-radius: 10px; margin-top: 10px; }
+    </style>
 </head>
 <body>
 
-    <!-- Navbar -->
     <header class="navbar">
         <div class="logo">Flex<span>PLUS</span></div>
         <nav class="nav-links">
@@ -27,7 +68,6 @@
     </header>
 
     <div class="main-container details-container">
-        <!-- Banner Backdrop / Topo -->
         <section class="details-banner" id="imageview_backdrop">
             <div class="details-banner-shadow">
                 <div class="details-banner-content">
@@ -62,7 +102,6 @@
             <p class="overview-text" id="textview_overview">Carregando sinopse...</p>
         </section>
 
-        <!-- Abas -->
         <section class="tabs-section">
             <div class="tab-headers">
                 <button class="tab-btn active" onclick="_mudarAba('trailer', event)">Trailer</button>
@@ -79,23 +118,22 @@
                 </div>
 
                 <div class="tab-page" id="tab_similar">
-                    <div class="movie-row" id="recyclerview_similar" style="padding-top: 10px;"></div>
+                    <div class="movie-row" id="recyclerview_similar" style="padding-top: 10px; display: flex; gap: 15px; overflow-x: auto;"></div>
                 </div>
 
                 <div class="tab-page" id="tab_comments">
                     <p id="textview_no_comments" style="color: #888; margin-bottom: 15px;">Sem comentários...</p>
                     <div id="recyclerview_comments" class="comments-list"></div>
                     
-                    <div class="comment-input-box">
-                        <input type="text" id="edittext_comments" placeholder="Escreva um comentário...">
-                        <button id="imageview_send"><i class="fa-solid fa-paper-plane"></i></button>
+                    <div class="comment-input-box" style="display: flex; background: #222; border-radius: 8px; padding: 5px 15px; margin-top: 20px; max-width: 500px;">
+                        <input type="text" id="edittext_comments" placeholder="Escreva um comentário..." style="flex:1; background:none; border:none; color:#fff; outline:none; padding:10px;">
+                        <button id="imageview_send" style="background:none; border:none; color:#F71B24; cursor:pointer;"><i class="fa-solid fa-paper-plane"></i></button>
                     </div>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script src="details.js"></script>

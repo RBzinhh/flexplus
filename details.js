@@ -27,35 +27,26 @@ function _carregarDetalhes(id, type) {
         if (!currentMedia) return;
 
         // Preencher Dados
-        document.getElementById('textview_title').innerText = currentMedia.Title || currentMedia.title || 'Sem Título';
-        document.getElementById('textview_rating').innerText = currentMedia.Vote || currentMedia.vote_average || '0.0';
+        document.getElementById('textview_title').innerText = currentMedia.Title || 'Sem Título';
+        document.getElementById('textview_rating').innerText = currentMedia.Vote || '0.0';
         document.getElementById('textview_year').innerText = currentMedia.Year || '2024';
         document.getElementById('textview_views').innerText = currentMedia.Views || '100';
         document.getElementById('textview_language').innerText = currentMedia.Language || 'PT';
         document.getElementById('textview_size').innerText = currentMedia.Size || '';
         document.getElementById('textview_genres').innerText = currentMedia.Genres || '';
-        document.getElementById('textview_overview').innerText = currentMedia.Overview || currentMedia.overview || 'Sem sinopse disponível.';
+        document.getElementById('textview_overview').innerText = currentMedia.Overview || 'Sem sinopse disponível.';
 
-        // Imagem Backdrop (Procura em Backdrop ou Poster)
-        let backdrop = currentMedia.Backdrop || currentMedia.backdrop_path || currentMedia.Poster || currentMedia.poster_path || '';
+        // Imagem Backdrop
+        let backdrop = currentMedia.Backdrop || currentMedia.Poster || '';
         if (backdrop && !backdrop.startsWith('http')) {
             backdrop = `https://image.tmdb.org/t/p/original${backdrop}`;
         }
-        
-        const backdropElement = document.getElementById('imageview_backdrop');
-        if (backdropElement && backdrop) {
-            backdropElement.style.backgroundImage = `url('${backdrop}')`;
-            backdropElement.style.backgroundSize = 'cover';
-            backdropElement.style.backgroundPosition = 'center';
-        }
+        document.getElementById('imageview_backdrop').style.backgroundImage = `url('${backdrop}')`;
 
-        // UNICA MUDANÇA NO BOTAO PLAY: Redireciona para o player.html passando os dados
+        // Botão Play
         document.getElementById('linear_play').onclick = () => {
-            let videoLink = currentMedia.Link || currentMedia.StreamUrl || currentMedia.url || '';
-            let mediaTitle = currentMedia.Title || currentMedia.title || 'FlexPlus';
-
-            if (videoLink) {
-                window.location.href = `player.html?url=${encodeURIComponent(videoLink)}&title=${encodeURIComponent(mediaTitle)}`;
+            if (currentMedia.Link || currentMedia.StreamUrl) {
+                window.location.href = currentMedia.Link || currentMedia.StreamUrl;
             } else {
                 alert('Link de exibição indisponível no momento.');
             }
@@ -80,14 +71,9 @@ function _carregarDetalhes(id, type) {
             }
         };
 
-        // Trailer (Apenas carrega se for um link HTTP válido)
-        const trailerIframe = document.getElementById('trailer_iframe');
-        if (trailerIframe) {
-            if (currentMedia.Trailer && currentMedia.Trailer.startsWith('http')) {
-                trailerIframe.src = currentMedia.Trailer;
-            } else {
-                trailerIframe.style.display = 'none';
-            }
+        // Trailer (Se houver link de embed/Youtube)
+        if (currentMedia.Trailer) {
+            document.getElementById('trailer_iframe').src = currentMedia.Trailer;
         }
 
         _carregarSimilares(currentMedia.Genres, node);
@@ -99,33 +85,27 @@ function _mudarAba(aba) {
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.tab-page').forEach(page => page.classList.remove('active'));
 
-    if (event && event.target) {
-        event.target.classList.add('active');
-    }
-    const targetTab = document.getElementById(`tab_${aba}`);
-    if (targetTab) {
-        targetTab.classList.add('active');
-    }
+    event.target.classList.add('active');
+    document.getElementById(`tab_${aba}`).classList.add('active');
 }
 
 function _carregarSimilares(generos, node) {
     db.ref(node).limitToFirst(10).once('value', (snapshot) => {
         const container = document.getElementById('recyclerview_similar');
-        if (!container) return;
         container.innerHTML = '';
         snapshot.forEach(child => {
             const item = child.val();
             const card = document.createElement('div');
             card.className = 'movie-card';
 
-            let poster = item.Poster || item.poster_path || '';
+            let poster = item.Poster || '';
             if (poster && !poster.startsWith('http')) {
                 poster = `https://image.tmdb.org/t/p/w500${poster}`;
             }
 
             card.innerHTML = `
-                <img src="${poster || 'https://via.placeholder.com/160x230'}" alt="${item.Title || item.title}">
-                <div class="info"><h4>${item.Title || item.title || 'Sem Título'}</h4></div>
+                <img src="${poster || 'https://via.placeholder.com/160x230'}" alt="${item.Title}">
+                <div class="info"><h4>${item.Title}</h4></div>
             `;
             card.onclick = () => {
                 window.location.href = `details.html?id=${child.key}&type=${node === 'Series' ? 'series' : 'movie'}`;

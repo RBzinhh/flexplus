@@ -10,14 +10,19 @@
 </head>
 <body>
 
-    <!-- Navbar / Cabeçalho -->
+    <!-- Navbar / Cabeçalho Unificado -->
     <header class="navbar">
         <div class="logo">Flex<span>PLUS</span></div>
         <nav class="nav-links">
-            <a href="index.html">Início</a>
-            <a href="search.html" class="active">Pesquisar</a>
-            <a href="#">Minha Lista</a>
+            <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>Início</span></a>
+            <a href="search.html" class="nav-item active"><i class="fa-solid fa-magnifying-glass"></i><span>Pesquisar</span></a>
+            <a href="favorites.html" class="nav-item"><i class="fa-solid fa-bookmark"></i><span>Favoritos</span></a>
+            <a href="settings.html" class="nav-item"><i class="fa-solid fa-gear"></i><span>Configurações</span></a>
         </nav>
+        <div class="user-profile">
+            <img id="profile-img" src="https://via.placeholder.com/40" alt="Perfil" class="avatar">
+            <span id="textview_name">RBzin</span>
+        </div>
     </header>
 
     <!-- Container Principal da Pesquisa -->
@@ -29,30 +34,23 @@
             <input type="text" id="edittext_search" placeholder="Pesquisar filme ou série...">
         </div>
 
-        <!-- Filtros (Recomendado, Inglês, Português) -->
+        <!-- Filtros -->
         <div class="filter-bar">
             <div class="filter-chip active" id="linear_recommended_filter">Recomendado</div>
             <div class="filter-chip" id="linear_english">Inglês</div>
             <div class="filter-chip" id="linear_hindi">Português</div>
         </div>
 
-        <!-- Mensagem de Aviso / Carregando -->
+        <!-- Resultados -->
         <div id="linear_main">
             <p id="textview_no_movies" class="no-movies-msg" style="display: none;">Lamentamos não termos encontrado o que você procurava...</p>
             
-            <!-- Resultados da Pesquisa -->
             <div class="section-title-search">Resultados</div>
-            <div class="movie-grid-search" id="recyclerview1">
-                <!-- Preenchido via JavaScript -->
-            </div>
+            <div class="movie-grid-search" id="recyclerview1"></div>
 
-            <!-- Seção Recomendados -->
-            <div class="section-title-search" style="margin-top: 30px;">Recomendado</div>
-            <div class="movie-grid-search" id="recyclerview2">
-                <!-- Preenchido via JavaScript -->
-            </div>
+            <div class="section-title-search" style="margin-top: 40px;">Recomendado</div>
+            <div class="movie-grid-search" id="recyclerview2"></div>
         </div>
-
     </div>
 
     <!-- Firebase SDKs -->

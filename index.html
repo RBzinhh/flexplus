@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlexPlus - Seus Filmes e Séries</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Fontes e Ícones -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -64,9 +63,7 @@
 
         <!-- Seção de Gêneros (Filtros) -->
         <section class="section-block">
-            <div class="genre-container" id="recyclerview_genre">
-                <!-- Injetado via JS -->
-            </div>
+            <div class="genre-container" id="recyclerview_genre"></div>
         </section>
 
         <!-- Categoria: Ação -->
@@ -99,16 +96,10 @@
             <div class="movie-row" id="recyclerview_newreleases"></div>
         </section>
 
-        <!-- Categoria: Adicionados Recentemente ao FLEX+ -->
+        <!-- Categoria: Adicionados Recentemente -->
         <section class="section-block">
             <h2 class="section-title">Adicionados recentemente ao <span style="color: #F71B24; margin-left: 5px;">FLEX+</span></h2>
             <div class="movie-row" id="recyclerview_newlyadded"></div>
-        </section>
-
-        <!-- Categoria: Porque você assistiu -->
-        <section class="section-block">
-            <h2 class="section-title">Porque você assistiu a <span id="textview_becauseyouwatched_movie" style="color: #F71B24; margin-left: 5px;">Filme</span></h2>
-            <div class="movie-row" id="recyclerview_becauseyouwatched"></div>
         </section>
 
         <!-- Rodapé -->

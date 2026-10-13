@@ -40,7 +40,6 @@ function _carregarTodosOsDados() {
             masterList = movies.concat(series);
             _renderizarGrid(masterList, 'recyclerview1');
             
-            // Recomendados (ex: nota > 7)
             let recomendados = masterList.filter(i => i.Vote && parseFloat(i.Vote) > 7);
             _renderizarGrid(recomendados, 'recyclerview2');
         });
@@ -74,11 +73,16 @@ function _renderizarGrid(dados, elementId) {
 
     container.innerHTML = '';
 
+    if (dados.length === 0) {
+        container.innerHTML = '<p style="color: #888; font-size: 14px; padding: 10px;">Nenhum resultado encontrado.</p>';
+        return;
+    }
+
     dados.forEach(item => {
         const card = document.createElement('div');
         card.className = 'movie-card';
 
-        let poster = item.Poster || item.Backdrop || '';
+        let poster = item.Poster || item.backdrop_path || item.Backdrop || '';
         if (poster && !poster.startsWith('http')) {
             poster = `https://image.tmdb.org/t/p/w500${poster}`;
         }
@@ -86,15 +90,16 @@ function _renderizarGrid(dados, elementId) {
             poster = 'https://via.placeholder.com/160x230?text=Sem+Capa';
         }
 
-        let title = item.Title || 'n/a';
-        let vote = item.Vote || 'n/a';
-        let overview = item.Overview || item.Genres || 'n/a';
+        const title = item.Title || item.title || 'Sem Título';
+        const vote = item.Vote || item.vote_average || '0.0';
 
         card.innerHTML = `
             <img src="${poster}" alt="${title}">
             <div class="info">
                 <h4>${title}</h4>
-                <span class="rating"><i class="fa-solid fa-star" style="color: #F71B24;"></i> ${vote}</span>
+                <div class="rating">
+                    <i class="fa-solid fa-star" style="color: #F71B24;"></i> <span>${vote}</span>
+                </div>
             </div>
         `;
 

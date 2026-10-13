@@ -197,7 +197,7 @@ body {
 }
 
 /* ==========================================================================
-   4. CHIPS DE GÊNERO E CARROSSÉIS (Com altura correta para cards)
+   4. CHIPS DE GÊNERO, CARROSSÉIS E CARDS
    ========================================================================== */
 .section-block {
     padding: 20px 50px;
@@ -262,7 +262,7 @@ body {
     display: none;
 }
 
-/* Setas Laterais */
+/* Setas de Rolagem Lateral */
 .scroll-btn {
     position: absolute;
     top: 40%;
@@ -296,11 +296,11 @@ body {
 .scroll-left { left: -15px; }
 .scroll-right { right: -15px; }
 
-/* Cards dos Filmes Padronizados com Altura Completa */
+/* Cards do Filme */
 .movie-card {
     min-width: 160px;
     width: 160px;
-    height: 300px;
+    height: 310px;
     background: #181818;
     border-radius: 10px;
     overflow: hidden;
@@ -318,7 +318,7 @@ body {
 
 .movie-card img {
     width: 100%;
-    height: 220px;
+    height: 230px;
     object-fit: cover;
     display: block;
 }
@@ -329,20 +329,21 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background: #181818;
 }
 
 .movie-card h4 {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: #ffffff;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
 }
 
 .movie-card .rating {
-    font-size: 11px;
+    font-size: 12px;
     color: #b3b3b3;
     display: flex;
     align-items: center;
@@ -436,7 +437,205 @@ body {
 }
 
 /* ==========================================================================
-   6. RODAPÉ
+   6. TELA DE DETALHES (DETAILS.HTML) - CORRIGIDA E ALINHADA
+   ========================================================================== */
+#linear_backdrop, .details-banner {
+    position: relative;
+    width: 100%;
+    min-height: 480px;
+    height: 65vh;
+    background-color: #111;
+    background-size: cover;
+    background-position: center;
+}
+
+#linear_shadow, .details-banner-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        0deg, 
+        #111111 10%, 
+        rgba(17, 17, 17, 0.8) 50%, 
+        rgba(17, 17, 17, 0.4) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 50px 30px 50px;
+}
+
+#linear4 {
+    margin-top: 10px;
+}
+
+#imageview_back, .btn-back {
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s;
+}
+
+#imageview_back:hover, .btn-back:hover {
+    background: #F71B24;
+    border-color: #F71B24;
+}
+
+#textview_title {
+    font-size: 38px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+#linear7, .meta-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 15px 0;
+    font-size: 14px;
+}
+
+#textview_rating {
+    color: #F71B24;
+    font-weight: 700;
+}
+
+#linear19, .details-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+#linear_play, #linear_download, .btn-play-large, .btn-download-large {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+#linear_play, .btn-play-large {
+    background-color: #F71B24;
+    color: #ffffff;
+}
+
+#linear_download, .btn-download-large {
+    background-color: #292929;
+    color: #ffffff;
+}
+
+#linear_play:hover, #linear_download:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+#linear22, .details-info-section {
+    padding: 25px 50px 10px 50px;
+}
+
+#textview_genres {
+    color: #F71B24;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+#textview_overview {
+    color: #b3b3b3;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 900px;
+}
+
+/* Abas de Detalhes */
+#linear_tablayout, .tabs-section {
+    padding: 20px 50px 50px 50px;
+}
+
+#linear28, .tab-headers {
+    display: flex;
+    gap: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+}
+
+.tab-btn, #textview_trailer, #textview_similar, #textview_comments {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 15px;
+    font-weight: 700;
+    padding-bottom: 12px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: color 0.3s;
+}
+
+.tab-btn.active {
+    color: #ffffff;
+    border-bottom-color: #F71B24;
+}
+
+.tab-page {
+    display: none;
+}
+
+.tab-page.active {
+    display: block;
+}
+
+#trailer_iframe {
+    width: 100%;
+    max-width: 800px;
+    height: 450px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+/* Caixa de Comentários */
+.comment-input-box, #linear_comments_bg {
+    display: flex;
+    background: #222222;
+    border-radius: 8px;
+    padding: 5px 15px;
+    margin-top: 20px;
+    max-width: 600px;
+}
+
+.comment-input-box input, #edittext_comments {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #ffffff;
+    outline: none;
+    padding: 10px;
+}
+
+.comment-input-box button, #imageview_send {
+    background: none;
+    border: none;
+    color: #F71B24;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* ==========================================================================
+   7. RODAPÉ
    ========================================================================== */
 footer {
     text-align: center;
